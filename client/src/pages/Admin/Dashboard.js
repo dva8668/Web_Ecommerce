@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
+
 import {
   Column,
   Pie,
@@ -6,7 +7,10 @@ import {
   Line,
   DualAxes,
 } from "@ant-design/plots";
-import { Row, Col, Card } from "antd";
+import { Row, Col, Card, Form, Button, DatePicker } from "antd";
+import apiPrivate from "../../hooks/apiPrivate";
+const { RangePicker } = DatePicker;
+
 const DemoColumn = () => {
   const data = [
     {
@@ -61,7 +65,7 @@ const DemoColumn = () => {
   return <Column {...config} />;
 };
 
-const DemoPie = () => {
+const DemoPie = ({ shirt, sweater, hoodie }) => {
   function renderStatistic(containerWidth, text, style) {
     const { width: textWidth, height: textHeight } = measureTextWidth(
       text,
@@ -92,15 +96,15 @@ const DemoPie = () => {
   const data = [
     {
       type: "T-shirt",
-      value: 33,
+      value: shirt,
     },
     {
       type: "Sweater",
-      value: 25,
+      value: sweater,
     },
     {
       type: "Hoodie",
-      value: 28,
+      value: hoodie,
     },
   ];
   const config = {
@@ -112,7 +116,7 @@ const DemoPie = () => {
     innerRadius: 0.64,
     meta: {
       value: {
-        formatter: (v) => `${v} VND`,
+        formatter: (value) => `${value} VND`,
       },
     },
     label: {
@@ -263,53 +267,242 @@ const DemoDualAxes = () => {
 };
 
 const Dashboard = () => {
+  const [orders, setOrders] = useState([]);
+  const [detailOrders, setDetailOrders] = useState([]);
+  const [revenue, setRevenue] = useState(0);
+  const [users, setUsers] = useState([]);
+  const [qualityCollection, setQualityCollection] = useState({
+    "t-shirt": 0,
+    sweater: 0,
+    hoodie: 0,
+  });
+
+  const [fetchedLoading, setFetchLoading] = useState(false);
+  const [ordersPickerDate, setordersPickerDate] = useState([]);
+  const [detailOrdersPickerDate, setDetailOrdersPickerDate] = useState([]);
+
+  useEffect(() => {
+    async function getDashBoard() {
+      try {
+        const data = await apiPrivate(
+          "http://localhost:3001/order/getAllOrder"
+        );
+        if (data.success) {
+          // set new List Unit orders
+          const newOrders = data.orders.map((order, index) => {
+            return {
+              key: index + 1,
+              ...order,
+            };
+          });
+          // set new Detail orders
+          const newData = await Promise.all(
+            newOrders.map(async (order) => {
+              const detail = await apiPrivate(
+                `order/getOrderById/${order.orderId}`
+              );
+              return detail.orders.map((detailOd) => detailOd);
+            })
+          );
+          const newDetail = Array.prototype.concat.apply([], newData);
+          newDetail.map((detail) => {
+            setQualityCollection((prev) => {
+              return {
+                ...prev,
+                [detail.category]: prev[detail.category] + 1,
+              };
+            });
+          });
+
+          // set Revennue
+          const revenue = data.orders.reduce((a, b) => a + b.totalPrice, 0);
+
+          setOrders(newOrders);
+          setordersPickerDate(newOrders);
+
+          setDetailOrders(newDetail);
+          setDetailOrdersPickerDate(newDetail);
+
+          setRevenue(revenue);
+        }
+
+        const users = await apiPrivate("http://localhost:3001/getAllUser");
+        if (data.success) {
+          const newusers = users.users.map((user, index) => {
+            return {
+              key: index + 1,
+              ...user,
+            };
+          });
+          setUsers(newusers);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setFetchLoading(true);
+      }
+    }
+    getDashBoard();
+  }, []);
+
+  const onFinishDate = (fieldsValue) => {
+    setQualityCollection({
+      "t-shirt": 0,
+      sweater: 0,
+      hoodie: 0,
+    });
+    const rangeValue = fieldsValue["range-picker"];
+    const values = [
+      rangeValue[0].format("YYYY-MM-DD"),
+      rangeValue[1].format("YYYY-MM-DD"),
+    ];
+    const newOrder = orders.filter((order) => {
+      const newDate = order.orderDate.split("T")[0];
+      if (values[0] <= newDate && newDate <= values[1]) {
+        return order;
+      }
+    });
+
+    const newDetailOrder = detailOrders.filter((order) => {
+      const newDate = order.orderDate.split("T")[0];
+      if (values[0] <= newDate && newDate <= values[1]) {
+        return order;
+      }
+    });
+
+    newDetailOrder.map((detail) => {
+      setQualityCollection((prev) => {
+        return {
+          ...prev,
+          [detail.category]: prev[detail.category] + 1,
+        };
+      });
+    });
+
+    const revenue = newOrder.reduce((a, b) => a + b.totalPrice, 0);
+
+    setRevenue(revenue);
+    setordersPickerDate(newOrder);
+    setDetailOrdersPickerDate(newDetailOrder);
+  };
+
+  const handleReset = () => {
+    setordersPickerDate(orders);
+    setDetailOrdersPickerDate(detailOrders);
+    const revenue = orders.reduce((a, b) => a + b.totalPrice, 0);
+    setRevenue(revenue);
+  };
+
   return (
-    <>
-      <Row gutter={16}>
-        <Col span={6}>
-          <Card title="Products Sold" bordered={false}>
-            <h2>567</h2>
-            Orders
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card title="Customer" bordered={false}>
-            <h2>457</h2>
-            VND
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card title="Revenue" bordered={false}>
-            <h2>123.456.790</h2>
-            VND
-          </Card>
-        </Col>
-        <Col span={6}>
-          <Card title="Benefit" bordered={false}>
-            <h2>68.789.738</h2>
-            VND
-          </Card>
-        </Col>
-      </Row>
-      <Row>
-        <Col xl={12} sx={24} sm={24} md={24} lg={24}>
-          <h2 style={{ marginTop: "60px" }}>Orders</h2>
-          <DemoPie />
-        </Col>
-        <Col xl={12} sx={24} sm={24} md={24} lg={24}>
-          <h2 style={{ marginTop: "60px" }}>Orders by month</h2>
-          <DemoColumn />
-        </Col>
-        <Col xl={12} sx={24} sm={24} md={24} lg={24}>
-          <h2 style={{ marginTop: "60px" }}>Revenue</h2>
-          <DemoLine />
-        </Col>
-        <Col xl={12} sx={24} sm={24} md={24} lg={24}>
-          <h2 style={{ marginTop: "60px" }}>Benefit</h2>
-          <DemoDualAxes />
-        </Col>
-      </Row>
-    </>
+    fetchedLoading && (
+      <>
+        <Row>
+          <Form
+            name="time_related_controls"
+            onFinish={onFinishDate}
+            style={{
+              maxWidth: 600,
+              marginBottom: 20,
+              display: "inline-flex",
+              float: "left",
+            }}
+          >
+            <Form.Item
+              name="range-picker"
+              label="Select time"
+              rules={[
+                {
+                  type: "array",
+                  required: true,
+                },
+              ]}
+            >
+              <RangePicker />
+            </Form.Item>
+            <Form.Item style={{ marginLeft: 20 }}>
+              <Button type="primary" htmlType="submit">
+                Search
+              </Button>
+            </Form.Item>
+            <Form.Item style={{ marginLeft: 20 }}>
+              <Button type="dashed" onClick={handleReset}>
+                Reset
+              </Button>
+            </Form.Item>
+          </Form>
+        </Row>
+        <Row gutter={16}>
+          <Col span={6}>
+            <Card
+              title="ORDERS / UNITS"
+              bordered={false}
+              style={{ backgroundColor: "#75be6e" }}
+            >
+              <h2>{`${detailOrdersPickerDate.length} / ${ordersPickerDate.length}`}</h2>
+              Orders
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card
+              title="REVENUES"
+              bordered={false}
+              style={{ backgroundColor: "#00b398" }}
+            >
+              <h2>
+                {(revenue * 1).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </h2>
+              VND
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card
+              title="BENEFITS"
+              bordered={false}
+              style={{ backgroundColor: "#5d9cd1" }}
+            >
+              <h2>
+                {((revenue * 45) / 100)
+                  .toString()
+                  .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+              </h2>
+              VND
+            </Card>
+          </Col>
+          <Col span={6}>
+            <Card
+              title="CUSTOMERS"
+              bordered={false}
+              style={{ backgroundColor: "#526e83" }}
+            >
+              <h2>{users.length}</h2>
+              Users
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col xl={12} sx={24} sm={24} md={24} lg={24}>
+            <h2 style={{ marginTop: "60px" }}>Orders</h2>
+            <DemoPie
+              shirt={qualityCollection["t-shirt"]}
+              sweater={qualityCollection.sweater}
+              hoodie={qualityCollection.hoodie}
+            />
+          </Col>
+          <Col xl={12} sx={24} sm={24} md={24} lg={24}>
+            <h2 style={{ marginTop: "60px" }}>Orders by month</h2>
+            <DemoColumn />
+          </Col>
+          <Col xl={12} sx={24} sm={24} md={24} lg={24}>
+            <h2 style={{ marginTop: "60px" }}>Revenue</h2>
+            <DemoLine />
+          </Col>
+          <Col xl={12} sx={24} sm={24} md={24} lg={24}>
+            <h2 style={{ marginTop: "60px" }}>Benefit</h2>
+            <DemoDualAxes />
+          </Col>
+        </Row>
+      </>
+    )
   );
 };
 export default Dashboard;

@@ -9,11 +9,7 @@ import {
   Select,
   DatePicker,
 } from "antd";
-import {
-  SearchOutlined,
-  QuestionCircleOutlined,
-  DownloadOutlined,
-} from "@ant-design/icons";
+import { SearchOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 import { CSVLink } from "react-csv";
 import Highlighter from "react-highlight-words";
 import ModalOrderAdmin from "../Components/ModalOrderAdmin";
@@ -386,14 +382,14 @@ const Order = () => {
           <RangePicker />
         </Form.Item>
         <Form.Item style={{ marginLeft: 20 }}>
-          <Button type="primary" htmlType="submit" danger>
+          <Button type="primary" htmlType="submit" primary>
             Search
           </Button>
         </Form.Item>
         <Form.Item style={{ marginLeft: 20 }}>
           <Button
             type="dashed"
-            danger
+            primary
             onClick={() => setordersPickerDate(orders)}
           >
             Reset

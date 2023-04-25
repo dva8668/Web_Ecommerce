@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import DEALOFWEEK from "../../../assets/images/deal_ofthe_week.png";
 import "./Advertisement.scss";

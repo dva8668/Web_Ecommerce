@@ -95,7 +95,7 @@ const ModalOrderAdmin = ({ open, setOpen, orderId, username }) => {
           width={1200}
           footer={[
             <Button key="submit" type="primary" danger onClick={handleCancel}>
-              Update Order
+              Close
             </Button>,
           ]}
         >
@@ -108,7 +108,7 @@ const ModalOrderAdmin = ({ open, setOpen, orderId, username }) => {
               color: "#fe4c50",
             }}
           >
-            Checkout
+            Order Detail!
           </h2>
 
           <Card

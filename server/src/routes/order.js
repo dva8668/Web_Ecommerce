@@ -4,6 +4,11 @@ const OrderController = require("../app/controllers/orderController");
 const verifyToken = require("../middleware/auth");
 
 router.get("/getAllOrder", verifyToken, OrderController.getAllOrder);
+router.get(
+  "/getAllOrderByUsername",
+  verifyToken,
+  OrderController.getAllOrderByUsername
+);
 router.get("/getOrderById/:id", verifyToken, OrderController.getOrderById);
 router.post("/createOrder", verifyToken, OrderController.createOrder);
 router.put("/editOrder/:orderId", verifyToken, OrderController.editOrder);

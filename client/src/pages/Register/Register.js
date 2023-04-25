@@ -1,14 +1,12 @@
-import { useState, useContext } from "react";
+import { useState } from "react";
 import styles from "./Register.module.scss";
 import classNames from "classnames/bind";
-import { AuthContext } from "../../contexts/authContext";
 import { Link, useNavigate } from "react-router-dom";
 import apiRequest from "../../hooks/api";
 
 const cx = classNames.bind(styles);
 
 function Register() {
-  const { login } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [loginForm, setLoginForm] = useState({});
 

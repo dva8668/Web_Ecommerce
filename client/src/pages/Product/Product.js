@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import apiPrivate from "../../hooks/apiPrivate";
 import apiRequest from "../../hooks/api";
 import { Button, Form, InputNumber, Select } from "antd";
+import { useNavigate } from "react-router";
 
 function ProductPage() {
+  const navigate = useNavigate();
+
   const path =
     window.location.href.split("/")[window.location.href.split("/").length - 1];
 
@@ -116,6 +119,7 @@ function ProductPage() {
       const post = await apiPrivate("/cart/createCart", "POST", newValue);
       if (post.success) {
         alert("Added to cart");
+        navigate(0);
       } else alert("Failed to cart");
     } catch (error) {
       console.log(error);

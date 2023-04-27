@@ -4,7 +4,6 @@ import CategoryBanner from "../../layouts/components/CategoryBanner/CategoryBann
 import Benefit from "../../layouts/components/Benefit/Benefit";
 import Advertisement from "../../layouts/components/Advertisement/Advertisement";
 import BestSeller from "../../layouts/components/BestSeller/BestSeller";
-
 import product123 from "../../assets/images/banner_1.jpg";
 const products = [
   {

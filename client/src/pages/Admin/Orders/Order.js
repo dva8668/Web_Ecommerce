@@ -27,6 +27,7 @@ const Order = () => {
   const [username, setUsername] = useState();
   const [ordersPickerDate, setordersPickerDate] = useState([]);
   const [detailOrderPicker, setDetailOrderPicker] = useState([]);
+  const [dataExport, setDataExport] = useState([]);
 
   const handleSearch = (selectedKeys, confirm, dataIndex) => {
     confirm();
@@ -297,6 +298,36 @@ const Order = () => {
           });
           setOrders(newOrders);
           setordersPickerDate(newOrders);
+
+          try {
+            const newData = await Promise.all(
+              newOrders.map(async (order) => {
+                const detail = await apiPrivate(
+                  `order/getOrderById/${order.orderId}`
+                );
+                return detail.orders.map((detailOd) => {
+                  return {
+                    ID: detailOd.orderId,
+                    Customer: detailOd.fullname,
+                    Address: detailOd.address,
+                    Product: detailOd.productName,
+                    Color: detailOd.productColor,
+                    Size: detailOd.productSize,
+                    Quality: detailOd.quality,
+                    Price: detailOd.price,
+                    TotalPrice: detailOd.totalPrice,
+                    Date: detailOd.orderDate,
+                  };
+                });
+              })
+            );
+
+            const newDetail = Array.prototype.concat.apply([], newData);
+            setDetailOrderPicker(newDetail);
+            setDataExport(newDetail);
+          } catch (error) {
+            console.log(error);
+          }
         }
       } catch (error) {
         console.log(error);
@@ -318,43 +349,12 @@ const Order = () => {
       }
     });
     setordersPickerDate(newOrder);
-  };
 
-  const handleExport = async (event, done) => {
-    try {
-      setLoading(true);
-      const newData = await Promise.all(
-        ordersPickerDate.map(async (order) => {
-          const detail = await apiPrivate(
-            `order/getOrderById/${order.orderId}`
-          );
-          return detail.orders.map((detailOd) => {
-            return {
-              ID: detailOd.orderId,
-              Customer: detailOd.fullname,
-              Address: detailOd.address,
-              Product: detailOd.productName,
-              Color: detailOd.productColor,
-              Size: detailOd.productSize,
-              Quality: detailOd.quality,
-              Price: detailOd.price,
-              TotalPrice: detailOd.totalPrice,
-              Date: detailOd.orderDate,
-            };
-          });
-        })
-      );
-
-      const newDetail = Array.prototype.concat.apply([], newData);
-      setDetailOrderPicker(newDetail);
-
-      done(true);
-    } catch (error) {
-      console.log(error);
-      done(false);
-    } finally {
-      setLoading(false);
-    }
+    setDataExport(
+      detailOrderPicker.filter((order) =>
+        newOrder.find(({ orderId }) => order.ID === orderId)
+      )
+    );
   };
 
   return (
@@ -382,24 +382,26 @@ const Order = () => {
           <RangePicker />
         </Form.Item>
         <Form.Item style={{ marginLeft: 20 }}>
-          <Button type="primary" htmlType="submit" primary>
+          <Button type="primary" htmlType="submit">
             Search
           </Button>
         </Form.Item>
         <Form.Item style={{ marginLeft: 20 }}>
           <Button
             type="dashed"
-            primary
-            onClick={() => setordersPickerDate(orders)}
+            onClick={() => {
+              setordersPickerDate(orders);
+              setDataExport(detailOrderPicker);
+            }}
           >
-            Reset
+            Reset Filter
           </Button>
         </Form.Item>
         <Form.Item style={{ marginLeft: 20 }}>
           <CSVLink
-            data={detailOrderPicker}
-            asyncOnClick={true}
-            onClick={handleExport}
+            data={dataExport}
+            // asyncOnClick={true}
+            // onClick={handleExport}
             style={{ color: "red" }}
           >
             {" "}

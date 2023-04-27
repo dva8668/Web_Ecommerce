@@ -47,7 +47,7 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
         if (updateUser.success) {
           setUser({
             ...user,
-            username: newValue.fullname,
+            fullname: newValue.fullname,
             address: newValue.address,
             phone: newValue.phone,
           });

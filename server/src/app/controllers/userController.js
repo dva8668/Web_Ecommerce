@@ -3,6 +3,8 @@ const pool = require("../../config/database");
 
 class UserController {
   get(req, res) {
+    console.log(req.username);
+
     pool.getConnection(function (err, connection) {
       if (err) throw err;
       connection.query(

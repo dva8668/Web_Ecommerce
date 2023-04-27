@@ -56,7 +56,9 @@ function Cart() {
       }
     }
 
-    getCart();
+    if (localStorage["token"]) {
+      getCart();
+    }
   }, []);
 
   const postCart = async (item, increase, decrease) => {
@@ -93,8 +95,6 @@ function Cart() {
       console.log(error);
     }
   };
-
-  console.log(cartSelect);
 
   const deleteItem = async (i) => {
     try {

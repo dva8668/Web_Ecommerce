@@ -18,45 +18,49 @@ const DefaultLayout = ({ children }) => {
 
   useEffect(() => {
     async function getCart() {
-      setFetchLoading(false);
-      try {
-        const data = await apiPrivate("/cart/getCart");
-        if (data.success) {
-          const productIds = [...new Set(data.cart.map((id) => id.productId))];
-          const newProductPist = await Promise.all(
-            productIds.map(async (productId) => {
-              return await apiPrivate(`/product/getOneProduct/${productId}`);
-            })
-          );
-          const newData = data.cart.map((item) => {
-            let newItem = {};
-            newProductPist.forEach((product) => {
-              if (product.products.productId === item.productId) {
-                newItem = {
-                  cartId: item.id,
-                  productId: product.products.productId,
-                  title: product.products.title,
-                  color: item.color,
-                  size: item.size,
-                  quality: item.quality,
-                  imagePath: product.products.imageLinks[0].name,
-                  price: item.price * item.quality,
-                };
-              }
+      if (localStorage["token"]) {
+        setFetchLoading(false);
+        try {
+          const data = await apiPrivate("/cart/getCart");
+          if (data.success) {
+            const productIds = [
+              ...new Set(data.cart.map((id) => id.productId)),
+            ];
+            const newProductPist = await Promise.all(
+              productIds.map(async (productId) => {
+                return await apiPrivate(`/product/getOneProduct/${productId}`);
+              })
+            );
+            const newData = data.cart.map((item) => {
+              let newItem = {};
+              newProductPist.forEach((product) => {
+                if (product.products.productId === item.productId) {
+                  newItem = {
+                    cartId: item.id,
+                    productId: product.products.productId,
+                    title: product.products.title,
+                    color: item.color,
+                    size: item.size,
+                    quality: item.quality,
+                    imagePath: product.products.imageLinks[0].name,
+                    price: item.price * item.quality,
+                  };
+                }
+              });
+              if (newItem) return newItem;
             });
-            if (newItem) return newItem;
-          });
-          const totalQty = newData.reduce((a, b) => a + b.quality, 0);
-          const totalPrice = newData.reduce((a, b) => a + b.price, 0);
+            const totalQty = newData.reduce((a, b) => a + b.quality, 0);
+            const totalPrice = newData.reduce((a, b) => a + b.price, 0);
 
-          setCart(newData);
-          setTotalPrice(totalPrice);
-          setTotalQty(totalQty);
+            setCart(newData);
+            setTotalPrice(totalPrice);
+            setTotalQty(totalQty);
+          }
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setFetchLoading(true);
         }
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setFetchLoading(true);
       }
     }
 

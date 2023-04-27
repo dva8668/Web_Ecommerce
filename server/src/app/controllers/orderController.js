@@ -28,7 +28,7 @@ class OrderController {
         (err, rows) => {
           if (err) throw err;
           if (rows.length === 0)
-            return res.status(401).json({ success: false });
+            return res.json({ success: false, orders: [] });
 
           res.status(200).json({
             success: true,
@@ -46,7 +46,7 @@ class OrderController {
     pool.getConnection(function (err, connection) {
       if (err) throw err;
       connection.query(
-        "SELECT * FROM orders inner join displayorder on orders.orderId = displayorder.orderId inner join product on displayorder.productId = product.productId WHERE orders.orderId = ?",
+        "SELECT orders.*, displayorder.*, product.category FROM orders inner join displayorder on orders.orderId = displayorder.orderId inner join product on displayorder.productId = product.productId WHERE displayorder.orderId = ?",
         [id],
         (err, rows, fields) => {
           if (err) throw err;

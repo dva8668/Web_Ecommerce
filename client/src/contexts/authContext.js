@@ -16,35 +16,6 @@ export const AuthContextProvider = ({ children }) => {
   async function loadUser() {
     if (localStorage["token"]) {
       authToken(localStorage["token"]);
-    }
-    try {
-      const data = await axios.get(`http://localhost:3001/auth`);
-      if (data.data.success) {
-        dispatch({
-          type: "LOGIN_USER",
-          payload: {
-            isAuthenticated: true,
-            username: data.data.username,
-            isAdmin: data.data.isAdmin,
-          },
-        });
-      }
-    } catch (error) {
-      localStorage.removeItem("token");
-      authToken(null);
-      dispatch({
-        type: "LOGIN_USER",
-        payload: { isAuthenticated: false, username: null, isAdmin: 0 },
-      });
-      console.log(error);
-    }
-  }
-
-  useEffect(() => {
-    async function autoLoadUser() {
-      if (localStorage["token"]) {
-        authToken(localStorage["token"]);
-      }
       try {
         const data = await axios.get(`http://localhost:3001/auth`);
         if (data.data.success) {
@@ -65,6 +36,36 @@ export const AuthContextProvider = ({ children }) => {
           payload: { isAuthenticated: false, username: null, isAdmin: 0 },
         });
         console.log(error);
+      }
+    }
+  }
+
+  useEffect(() => {
+    async function autoLoadUser() {
+      if (localStorage["token"]) {
+        authToken(localStorage["token"]);
+
+        try {
+          const data = await axios.get(`http://localhost:3001/auth`);
+          if (data.data.success) {
+            dispatch({
+              type: "LOGIN_USER",
+              payload: {
+                isAuthenticated: true,
+                username: data.data.username,
+                isAdmin: data.data.isAdmin,
+              },
+            });
+          }
+        } catch (error) {
+          localStorage.removeItem("token");
+          authToken(null);
+          dispatch({
+            type: "LOGIN_USER",
+            payload: { isAuthenticated: false, username: null, isAdmin: 0 },
+          });
+          console.log(error);
+        }
       }
     }
     autoLoadUser();

@@ -24,7 +24,9 @@ function Login() {
       if (data.success) {
         if (data.isAdmin === 1) {
           navigation("/dashboard");
-        } else navigation("/");
+        } else {
+          navigation("/");
+        }
       } else {
         alert("Username or Password is incorrect!");
       }

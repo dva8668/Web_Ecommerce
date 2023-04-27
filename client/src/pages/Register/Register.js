@@ -22,9 +22,7 @@ function Register() {
       setLoading(true);
       const data = await apiRequest("/create", "POST", loginForm);
       if (data.success) {
-        localStorage.setItem("token", data.accessToken);
-        localStorage.setItem("isAdmin", data.isAdmin);
-        navigation("/");
+        navigation("/login");
       } else {
         alert("Email already exists!");
       }

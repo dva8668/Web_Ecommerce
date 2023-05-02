@@ -46,7 +46,7 @@ function Login() {
           </div>
 
           <form className={cx("login100-form validate-form")}>
-            <span className={cx("login100-form-title")}>Member Login</span>
+            <span className={cx("login100-form-title")}>Đăng nhập</span>
 
             <div className={cx("wrap-input100 validate-input")}>
               <input
@@ -77,14 +77,14 @@ function Login() {
                 </button>
               ) : (
                 <button className={cx("login100-form-btn")} onClick={Login}>
-                  Login
+                  Đăng nhập
                 </button>
               )}
             </div>
 
             <div className={cx("text-center")}>
               <Link className={cx("txt2")} to="/register">
-                Create your Account
+                Tạo tài khoản mới
               </Link>
             </div>
           </form>

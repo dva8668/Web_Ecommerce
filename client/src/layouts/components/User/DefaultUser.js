@@ -21,8 +21,8 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem(<Link to="/profile">Profile</Link>, "profile", <ShopOutlined />),
-  getItem(<Link to="/orders">Orders</Link>, "orders", <PercentageOutlined />),
+  getItem(<Link to="/profile">Thông tin</Link>, "profile", <ShopOutlined />),
+  getItem(<Link to="/orders">Đã mua</Link>, "orders", <PercentageOutlined />),
   getItem(
     <span
       style={{ paddingRight: "80px" }}
@@ -32,7 +32,7 @@ const items = [
         window.location.href = "/login";
       }}
     >
-      Logout
+      Đăng xuất
     </span>,
     "logout",
     <PoweroffOutlined />

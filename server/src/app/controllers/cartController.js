@@ -1,5 +1,5 @@
 jwt = require("jsonwebtoken");
-const pool = require("../../config/database");
+const pool = require("../database");
 
 class CartController {
   getCart(req, res) {

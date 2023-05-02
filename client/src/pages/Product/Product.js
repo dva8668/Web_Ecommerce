@@ -137,7 +137,7 @@ function ProductPage() {
               <div className="breadcrumbs d-flex flex-row align-items-center">
                 <ul>
                   <li>
-                    <Link to="/">Home</Link>
+                    <Link to="/">Trang chủ</Link>
                   </li>
                   <li className="active">
                     <Link to={`/category/${product.category}`}>
@@ -196,7 +196,7 @@ function ProductPage() {
                   <span>
                     <i className="fas fa-truck"></i>
                   </span>
-                  <span>free delivery</span>
+                  <span>Miễn phí vận chuyển</span>
                 </div>
                 <div className="original_price">
                   {(product.price * 2 - 1)
@@ -249,7 +249,7 @@ function ProductPage() {
                 >
                   <Form.Item
                     name="color"
-                    label="Color"
+                    label="Màu"
                     rules={[
                       {
                         required: true,
@@ -287,7 +287,7 @@ function ProductPage() {
                       }))}
                     />
                   </Form.Item>
-                  <Form.Item label="Quality">
+                  <Form.Item label="Số lượng">
                     <Form.Item
                       name="quality"
                       noStyle
@@ -308,9 +308,9 @@ function ProductPage() {
                       />
                     </Form.Item>
                     <label style={{ marginLeft: 12 }}>
-                      Only
+                      Còn lại
                       <span style={{ color: "#fe4c50" }}>{` ${quality} `}</span>
-                      products
+                      sản phẩm
                     </label>
                   </Form.Item>
                   <Form.Item style={{ marginTop: 20, marginLeft: 78 }}>
@@ -338,7 +338,7 @@ function ProductPage() {
                           minWidth: 120,
                         }}
                       >
-                        add to cart
+                        Thêm vào giỏ hàng
                       </Button>
                     )}
                   </Form.Item>

@@ -12,7 +12,13 @@ router.get(
 router.get("/getOrderById/:id", verifyToken, OrderController.getOrderById);
 router.post("/createOrder", verifyToken, OrderController.createOrder);
 router.put("/editOrder/:orderId", verifyToken, OrderController.editOrder);
-
 router.delete("/delete/:id", verifyToken, OrderController.deleteOrderById);
+
+// checkout
+router.post("/create_payment_url", OrderController.createPaymentUrl);
+router.get("/vnpay_return", OrderController.VNPayReturn);
+router.get("/vnpay_ipn", OrderController.VNPipn);
+router.post("/querydr", OrderController.QueryDr);
+router.post("/refund", OrderController.refund);
 
 module.exports = router;

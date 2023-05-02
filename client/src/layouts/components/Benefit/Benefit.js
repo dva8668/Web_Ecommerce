@@ -12,7 +12,7 @@ function Benefit() {
                 <i className="fa fa-truck" aria-hidden="true"></i>
               </div>
               <div className="benefit_content">
-                <h6>free shipping</h6>
+                <h6>Giao hàng miễn phí</h6>
                 <p>Suffered Alteration in Some Form</p>
               </div>
             </div>
@@ -23,7 +23,7 @@ function Benefit() {
                 <i className="far fa-money-bill-alt"></i>
               </div>
               <div className="benefit_content">
-                <h6>cach on delivery</h6>
+                <h6>Thanh toán khi nhận hàng</h6>
                 <p>The Internet Tend To Repeat</p>
               </div>
             </div>
@@ -34,7 +34,7 @@ function Benefit() {
                 <i className="fa fa-undo" aria-hidden="true"></i>
               </div>
               <div className="benefit_content">
-                <h6>45 days return</h6>
+                <h6>Miễn phí trả hàng sau 7 ngày</h6>
                 <p>Making it Look Like Readable</p>
               </div>
             </div>
@@ -45,7 +45,7 @@ function Benefit() {
                 <i className="far fa-clock"></i>
               </div>
               <div className="benefit_content">
-                <h6>opening all week</h6>
+                <h6>Mở cửa tất cả các ngày trong tuần</h6>
                 <p>8AM - 09PM</p>
               </div>
             </div>

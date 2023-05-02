@@ -10,19 +10,19 @@ function Filter() {
       </div>
       <ul className="sidebar_categories">
         <li>
-          <Link to="#">New Arrivals</Link>
+          <Link to="/category/t-shirt">Mới nhất</Link>
         </li>
         <li>
-          <Link to="#">Best Seller</Link>
+          <Link to="/category/hoodie">Bán chạy</Link>
         </li>
         <li>
-          <Link to="/category/t-shirt">T-shirt</Link>
+          <Link to="/category/t-shirt">Áo thun</Link>
         </li>
         <li>
-          <Link to="/category/sweater">Sweater</Link>
+          <Link to="/category/sweater">Áo thu đông</Link>
         </li>
         <li>
-          <Link to="/category/hoodie">Hoodie</Link>
+          <Link to="/category/hoodie">Áo Hoodie</Link>
         </li>
       </ul>
     </div>

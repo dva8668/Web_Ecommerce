@@ -4,6 +4,7 @@ import Banner2 from "../../../assets/images/banner_2.jpg";
 import Banner3 from "../../../assets/images/banner_3.jpg";
 
 import "./CategoryBanner.scss";
+import { Link } from "react-router-dom";
 function CategoryBanner() {
   return (
     <div className="banner">
@@ -18,7 +19,7 @@ function CategoryBanner() {
               data-aos="fade-right"
             >
               <div className="banner_category">
-                <a href="categories.html">women's</a>
+                <Link to="/category/t-shirt">Nữ</Link>
               </div>
             </div>
           </div>
@@ -31,7 +32,7 @@ function CategoryBanner() {
               data-aos="fade-up"
             >
               <div className="banner_category">
-                <a href="categories.html">accessories's</a>
+                <Link to="/category/sweater">Phụ Kiện</Link>
               </div>
             </div>
           </div>
@@ -44,7 +45,7 @@ function CategoryBanner() {
               data-aos="fade-left"
             >
               <div className="banner_category">
-                <a href="categories.html">men's</a>
+                <Link to="/category/hoodie">Nam</Link>
               </div>
             </div>
           </div>

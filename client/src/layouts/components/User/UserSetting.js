@@ -72,8 +72,8 @@ const UserSetting = () => {
       {fetchedLoading ? (
         <DefaultUser>
           <div style={{ borderBottom: "2px solid #efefef" }}>
-            <h1>My Profile</h1>
-            <p>Manage profile information for account security.</p>
+            <h1>Thông tin cá nhân</h1>
+            <p>Quản lý thông tin hồ sơ để bảo mật tài khoản.</p>
           </div>
           <Form
             labelCol={{

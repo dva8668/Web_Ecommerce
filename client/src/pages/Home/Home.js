@@ -1,47 +1,45 @@
-import { Fragment, useEffect } from "react";
+import { Fragment, useState, useEffect } from "react";
 import HomeBanner from "../../layouts/components/HomeBanner/HomeBanner";
 import CategoryBanner from "../../layouts/components/CategoryBanner/CategoryBanner";
 import Benefit from "../../layouts/components/Benefit/Benefit";
 import Advertisement from "../../layouts/components/Advertisement/Advertisement";
 import BestSeller from "../../layouts/components/BestSeller/BestSeller";
-import product123 from "../../assets/images/banner_1.jpg";
-const products = [
-  {
-    _id: 1,
-    title: "Ao Phong",
-    imagePath: product123,
-    price: 29.99,
-  },
-  {
-    _id: 2,
-    title: "Ao Phong 2",
-    imagePath: product123,
-    price: 29.99,
-  },
-  {
-    _id: 3,
-    title: "Ao 3",
-    imagePath: product123,
-    price: 29.99,
-  },
-  {
-    _id: 4,
-    title: "Ao Phong",
-    imagePath: product123,
-    price: 29.99,
-  },
-];
-
+import apiRequest from "../../hooks/api";
 const addToBag = (params) => {
   localStorage.setItem("cart", params);
 };
 
 function Home() {
+  const [products, setProducts] = useState([]);
+
   useEffect(() => {
     localStorage.setItem(
       "date",
       new Date(new Date().getTime() + 5 * 24 * 60 * 60 * 1000).toString()
     );
+  }, []);
+
+  useEffect(() => {
+    async function getCategoryByPath() {
+      try {
+        const data = await apiRequest(`/product/getProductByCategory/t-shirt`);
+        if (data.success) {
+          setProducts(
+            data.products.map((product) => {
+              return {
+                productId: product.productId,
+                price: product.price,
+                title: product.title,
+                image: require(`../../assets/images/${product.image.name}`),
+              };
+            })
+          );
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getCategoryByPath();
   }, []);
 
   return (

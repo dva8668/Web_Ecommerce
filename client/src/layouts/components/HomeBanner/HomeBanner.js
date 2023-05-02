@@ -21,10 +21,10 @@ function HomeBanner() {
             <div className="row align-items-center fill_height">
               <div className="col">
                 <div className="main_slider_content" data-aos="fade-right">
-                  <h6>Spring / Summer Collection 2022</h6>
-                  <h1>Get up to 30% Off New Arrivals</h1>
+                  <h6>Spring / Bộ sưu tập mùa hè 2023</h6>
+                  <h1>Khuyến mãi cực lớn lên đến 30%</h1>
                   <div className="red_button shop_now_button">
-                    <Link to="/category/t-shirt">shop now</Link>
+                    <Link to="/category/t-shirt">Mua ngay</Link>
                   </div>
                 </div>
               </div>
@@ -43,10 +43,10 @@ function HomeBanner() {
             <div className="row align-items-center fill_height">
               <div className="col">
                 <div className="main_slider_content" data-aos="fade-right">
-                  <h6>Spring / Summer Collection 2022</h6>
-                  <h1>Get up to 30% Off New Arrivals</h1>
+                  <h6>Spring / Bộ sưu tập mùa xuân 2023</h6>
+                  <h1>Khuyến mãi cực lớn lên đến 30%</h1>
                   <div className="red_button shop_now_button">
-                    <Link to="/category/sweater">shop now</Link>
+                    <Link to="/category/sweater">Mua ngay</Link>
                   </div>
                 </div>
               </div>
@@ -65,10 +65,10 @@ function HomeBanner() {
             <div className="row align-items-center fill_height">
               <div className="col">
                 <div className="main_slider_content" data-aos="fade-right">
-                  <h6>Spring / Summer Collection 2022</h6>
-                  <h1>Get up to 30% Off New Arrivals</h1>
+                  <h6>Spring / Bộ sưu tập đồ đi biển 2023</h6>
+                  <h1>Khuyến mãi cực lớn lên đến 30%</h1>
                   <div className="red_button shop_now_button">
-                    <Link to="/category/hoodie">shop now</Link>
+                    <Link to="/category/hoodie">Mua ngay</Link>
                   </div>
                 </div>
               </div>

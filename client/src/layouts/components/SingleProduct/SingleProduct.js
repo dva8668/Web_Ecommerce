@@ -37,7 +37,7 @@ function SingleProduct({ productItem, addToBag }) {
         className="red_button add_to_cart_button"
         onClick={() => addToBag(productItem.productId)}
       >
-        <div style={{ color: "#ffffff" }}>add to cart</div>
+        <div style={{ color: "#ffffff" }}>Thêm vào giỏ hàng</div>
       </div>
     </div>
   );

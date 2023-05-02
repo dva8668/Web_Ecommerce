@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import DEALOFWEEK from "../../../assets/images/deal_ofthe_week.png";
 import "./Advertisement.scss";
+import { Link } from "react-router-dom";
 const Advertisement = (localDate) => {
   const [date, setDate] = useState({
     days: 0,
@@ -75,7 +76,7 @@ const Advertisement = (localDate) => {
           <div className="col-lg-6 text-right deal_ofthe_week_col">
             <div className="deal_ofthe_week_content d-flex flex-column align-items-center float-right">
               <div className="section_title">
-                <h2>Deal Of The Week</h2>
+                <h2>Khuyễn mại cực SỐC !!!</h2>
               </div>
               <ul className="timer">
                 <li className="d-inline-flex flex-column justify-content-center align-items-center">
@@ -83,30 +84,30 @@ const Advertisement = (localDate) => {
                     {addLeadingZeros(date.days)}{" "}
                   </div>
                   <div className="timer_unit">
-                    {date.days === 1 ? "Day" : "Days"}
+                    {date.days === 1 ? "Ngày" : "Ngày"}
                   </div>
                 </li>
                 <li className="d-inline-flex flex-column justify-content-center align-items-center">
                   <div id="hour" className="timer_num">
                     {addLeadingZeros(date.hours)}
                   </div>
-                  <div className="timer_unit">Hours</div>
+                  <div className="timer_unit">Giờ</div>
                 </li>
                 <li className="d-inline-flex flex-column justify-content-center align-items-center">
                   <div id="minute" className="timer_num">
                     {addLeadingZeros(date.min)}
                   </div>
-                  <div className="timer_unit">Mins</div>
+                  <div className="timer_unit">Phút</div>
                 </li>
                 <li className="d-inline-flex flex-column justify-content-center align-items-center">
                   <div id="second" className="timer_num">
                     {addLeadingZeros(date.sec)}
                   </div>
-                  <div className="timer_unit">Sec</div>
+                  <div className="timer_unit">Giây</div>
                 </li>
               </ul>
               <div className="red_button deal_ofthe_week_button">
-                <a href="#">shop now</a>
+                <Link to="">Mua ngay</Link>
               </div>
             </div>
           </div>

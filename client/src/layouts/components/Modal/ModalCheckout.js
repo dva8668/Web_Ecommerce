@@ -1,6 +1,16 @@
 import React, { useEffect, useContext, useState } from "react";
 import { EnvironmentOutlined } from "@ant-design/icons";
-import { Button, Modal, Card, Avatar, Form, Row, Col, Input } from "antd";
+import {
+  Button,
+  Modal,
+  Card,
+  Avatar,
+  Form,
+  Row,
+  Col,
+  Input,
+  Radio,
+} from "antd";
 import apiPrivate from "../../../hooks/apiPrivate";
 import { AuthContext } from "../../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +23,7 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
   const [openCheck, setOpenCheck] = useState(false);
   const [fetchedLoading, setFetchedLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getProfile() {
@@ -76,7 +86,7 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
 
       if (createOrder.success) {
         alert("Order successfully!");
-        navigation("/");
+        navigate(0);
       }
     } catch (error) {
       console.log(error);
@@ -84,6 +94,37 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
       setLoading(false);
     }
   };
+
+  const handleCheckout = async () => {
+    try {
+      const data = await apiPrivate("/order/create_payment_url", "POST", {
+        amount: 10000,
+        bankCode: "",
+        language: "vn",
+      });
+      if (data.vnpUrl) {
+        window.location.replace(data.vnpUrl);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const getVNPReturn = async () => {
+      try {
+        const data = await apiPrivate("/order/vnpay_return");
+        if (data.success) {
+          await handleCheckout();
+          console.log(data);
+          navigate(0);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getVNPReturn();
+  });
 
   return (
     fetchedLoading && (
@@ -104,8 +145,9 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
               danger
               loading={loading}
               onClick={handleOrder}
+              style={{ marginRight: 52, minWidth: 120 }}
             >
-              Order
+              Checkout
             </Button>,
           ]}
         >
@@ -323,6 +365,22 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
               </span>
             </h3>
             <hr />
+            <Radio.Group
+              defaultValue="default"
+              // buttonStyle="solid"
+              style={{ display: "flex", float: "right", marginBottom: "40px" }}
+            >
+              <Radio.Button
+                value="vnpay"
+                style={{ marginRight: 40 }}
+                onClick={handleCheckout}
+              >
+                Cổng thanh toán VNPAYQR
+              </Radio.Button>
+              <Radio.Button value="default">
+                Thanh toán khi nhận hàng
+              </Radio.Button>
+            </Radio.Group>
           </div>
         </Modal>
       </>

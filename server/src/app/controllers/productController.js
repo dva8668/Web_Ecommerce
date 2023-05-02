@@ -1,5 +1,5 @@
 jwt = require("jsonwebtoken");
-const pool = require("../../config/database");
+const pool = require("../database");
 const { v4: uuidv4 } = require("uuid");
 const fs = require("fs");
 const Readable = require("stream").Readable;

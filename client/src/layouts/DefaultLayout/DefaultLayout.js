@@ -93,20 +93,20 @@ const DefaultLayout = ({ children }) => {
                 <div className="col-lg-12 text-right">
                   <div className="logo_container">
                     <Link to="/">
-                      <span>ARUZA</span>STORE
+                      <span>2Hand</span>Official
                     </Link>
                   </div>
                   <nav className="navbar">
                     <ul className="navbar_menu">
                       <li>
-                        <Link to="/">home</Link>
+                        <Link to="/">Trang chủ</Link>
                       </li>
                       <li>
-                        <Link to="/category/t-shirt">New Arrivals</Link>
+                        <Link to="/category/t-shirt">Mới nhất</Link>
                       </li>
 
                       <li>
-                        <Link to="/category/sweater">Best Seller</Link>
+                        <Link to="/category/sweater">Bán chạy</Link>
                       </li>
                     </ul>
                     {token || authState.isAuthenticated ? (

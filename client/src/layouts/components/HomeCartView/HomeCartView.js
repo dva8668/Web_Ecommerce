@@ -14,7 +14,7 @@ function HomeCartView({ cart, show, showHideModal, totalPrice, handleDelete }) {
   return (
     <Modal show={show} onHide={() => showHideModal()} className="right">
       <Modal.Header closeButton>
-        <Modal.Title>Your Cart</Modal.Title>
+        <Modal.Title>Giỏ hàng</Modal.Title>
         {cart.length > 0 ? (
           <span className="checkout--btn" onClick={goToChechout}>
             checkout{" "}
@@ -48,17 +48,17 @@ function HomeCartView({ cart, show, showHideModal, totalPrice, handleDelete }) {
                         ></i>
                       </div>
                       <div className="basket--item--quantity">
-                        Color: <span>{item.color}</span>
+                        Màu: <span>{item.color}</span>
                       </div>
                       <div className="basket--item--quantity">
                         Size: <span>{item.size}</span>
                       </div>
                       <div className="basket--item--quantity">
-                        Quantity: <span>{item.quality}</span>
+                        Số lượng: <span>{item.quality}</span>
                       </div>
                       <div className="basket--item--price">
                         {" "}
-                        Price:{" "}
+                        Giá:{" "}
                         <span>
                           {" "}
                           {(item.price * 1)
@@ -76,7 +76,7 @@ function HomeCartView({ cart, show, showHideModal, totalPrice, handleDelete }) {
                 <h3
                   style={{ textAlign: "right", marginTop: 16, marginRight: 16 }}
                 >
-                  Total:{" "}
+                  Tổng:{" "}
                   <span style={{ color: "#FE4C50" }}>
                     {(totalPrice * 1)
                       .toString()

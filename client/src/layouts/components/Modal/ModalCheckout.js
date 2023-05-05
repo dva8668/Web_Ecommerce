@@ -14,6 +14,7 @@ import {
 import apiPrivate from "../../../hooks/apiPrivate";
 import { AuthContext } from "../../../contexts/authContext";
 import { useNavigate } from "react-router-dom";
+import apiRequest from "../../../hooks/api";
 
 const { Meta } = Card;
 
@@ -22,6 +23,7 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
   const [user, setUser] = useState({});
   const [openCheck, setOpenCheck] = useState(false);
   const [fetchedLoading, setFetchedLoading] = useState(false);
+  const [paymentLoading, setPaymentLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
@@ -85,8 +87,7 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
       });
 
       if (createOrder.success) {
-        alert("Order successfully!");
-        navigate(0);
+        window.location.replace("/success");
       }
     } catch (error) {
       console.log(error);
@@ -97,34 +98,34 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
 
   const handleCheckout = async () => {
     try {
-      const data = await apiPrivate("/order/create_payment_url", "POST", {
+      setPaymentLoading(true);
+      const data = await apiRequest("/order/create_payment_url", "POST", {
         amount: 10000,
         bankCode: "",
         language: "vn",
       });
+
       if (data.vnpUrl) {
         window.location.replace(data.vnpUrl);
+        try {
+          setLoading(true);
+          await apiPrivate("order/createOrder", "POST", {
+            user: user,
+            cart: cartSelect,
+            totalPrice: totalPrice,
+          });
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setPaymentLoading(false);
     }
   };
-
-  useEffect(() => {
-    const getVNPReturn = async () => {
-      try {
-        const data = await apiPrivate("/order/vnpay_return");
-        if (data.success) {
-          await handleCheckout();
-          console.log(data);
-          navigate(0);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getVNPReturn();
-  });
 
   return (
     fetchedLoading && (
@@ -374,6 +375,7 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
                 value="vnpay"
                 style={{ marginRight: 40 }}
                 onClick={handleCheckout}
+                loading={paymentLoading}
               >
                 Cổng thanh toán VNPAYQR
               </Radio.Button>

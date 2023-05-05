@@ -222,6 +222,8 @@ const Order = () => {
       dataIndex: "orderDate",
       key: "orderDate",
       ellipsis: true,
+      defaultSortOrder: "descend",
+
       sorter: {
         compare: (a, b) => new Date(a.orderDate) - new Date(b.orderDate),
       },

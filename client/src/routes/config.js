@@ -17,6 +17,7 @@ import Login from "../pages/Login/Login";
 import UserSetting from "../layouts/components/User/UserSetting";
 import UserOrder from "../layouts/components/User/UserOrder";
 import Cart from "../pages/Cart/Cart";
+import Success from "../layouts/components/Success/success";
 
 const publicRoutes = [
   { path: "/", component: Home },
@@ -28,6 +29,7 @@ const publicRoutes = [
   { path: "profile", component: UserSetting },
   { path: "orders", component: UserOrder },
   { path: "cart", component: Cart },
+  { path: "success", component: Success },
 ];
 
 const privateRoutes = [

@@ -14,6 +14,8 @@ router.post("/createOrder", verifyToken, OrderController.createOrder);
 router.put("/editOrder/:orderId", verifyToken, OrderController.editOrder);
 router.delete("/delete/:id", verifyToken, OrderController.deleteOrderById);
 
+router.get("/getOrderQuality", verifyToken, OrderController.getOrderQuality);
+
 // checkout
 router.post("/create_payment_url", OrderController.createPaymentUrl);
 router.get("/vnpay_return", OrderController.VNPayReturn);

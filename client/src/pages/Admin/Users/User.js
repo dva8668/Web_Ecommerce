@@ -192,8 +192,8 @@ const User = () => {
             </Button>
 
             <Popconfirm
-              title="Delete this product"
-              description="Are you sure to delete this product?"
+              title="Delete this user"
+              description="Are you sure to delete this user?"
               okText="Delete"
               onConfirm={() => handleConfirmDelete(record.username)}
               icon={

@@ -15,8 +15,8 @@ Content-Type: application/json
 
 
 ### GET User
-GET http://localhost:3001/getAllUser
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODA4NjA3MjR9.glP6UT5bEyXTussBpndDbZVdzJqNpv3H3B3OzZ7Q0Bo
+GET http://localhost:3001/order/getOrderQuality
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODMxMjc2MzZ9.kFE4pzQKFl1qYJcoKk6OhyFvzFNRZ-PzfHowIO2IEiU
 
 
 

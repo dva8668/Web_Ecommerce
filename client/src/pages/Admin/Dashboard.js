@@ -441,7 +441,7 @@ const Dashboard = () => {
           />
         </Col>
         <Col xl={12} sx={24} sm={24} md={24} lg={24}>
-          <h2 style={{ marginTop: "60px" }}>Revenue</h2>
+          <h2 style={{ marginTop: "60px" }}>Quality</h2>
           <DemoLine countQuality={countQuality} />
         </Col>
       </Row>

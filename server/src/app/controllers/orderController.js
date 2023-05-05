@@ -23,6 +23,26 @@ class OrderController {
     });
   }
 
+  getOrderQuality(req, res) {
+    pool.getConnection(function (err, connection) {
+      if (err) throw err;
+      connection.query(
+        "SELECT productName, COUNT(*)  from displayorder GROUP BY productName ORDER BY COUNT(*) desc ",
+        (err, rows) => {
+          if (err) throw err;
+          if (rows.length === 0)
+            return res.status(401).json({ success: false });
+
+          res.status(200).json({
+            success: true,
+            orders: rows,
+          });
+        }
+      );
+      connection.release();
+    });
+  }
+
   getAllOrderByUsername(req, res) {
     pool.getConnection(function (err, connection) {
       if (err) throw err;
@@ -269,7 +289,6 @@ class OrderController {
 
   VNPayReturn(req, res) {
     let vnp_Params = req.query;
-    console.log(vnp_Params);
 
     let secureHash = vnp_Params["vnp_SecureHash"];
 

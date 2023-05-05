@@ -93,7 +93,7 @@ const DefaultLayout = ({ children }) => {
                 <div className="col-lg-12 text-right">
                   <div className="logo_container">
                     <Link to="/">
-                      <span>2Hand</span>Official
+                      <span>Supper</span>Market
                     </Link>
                   </div>
                   <nav className="navbar">

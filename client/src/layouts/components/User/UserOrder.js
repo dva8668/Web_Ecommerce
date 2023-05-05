@@ -55,6 +55,7 @@ const UserOrder = () => {
       dataIndex: "orderDate",
       key: "orderDate",
       ellipsis: true,
+      defaultSortOrder: "descend",
       sorter: {
         compare: (a, b) => new Date(a.orderDate) - new Date(b.orderDate),
       },
@@ -76,45 +77,11 @@ const UserOrder = () => {
             >
               More
             </Button>
-
-            <Popconfirm
-              title="Delete this product"
-              description="Are you sure to delete this product?"
-              okText="Delete"
-              onConfirm={() => handleConfirmDelete(record.orderId)}
-              icon={
-                <QuestionCircleOutlined
-                  style={{
-                    color: "red",
-                    padding: 0,
-                  }}
-                />
-              }
-            >
-              <Button danger type="primary">
-                Delete
-              </Button>
-            </Popconfirm>
           </Space>
         );
       },
     },
   ];
-
-  async function handleConfirmDelete(id) {
-    try {
-      const data = await apiPrivate(
-        `http://localhost:3001/order/delete/${id}`,
-        "DELETE"
-      );
-      if (data.success) {
-        setOrders(orders.filter((order) => order.orderId !== id));
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-    }
-  }
 
   useEffect(() => {
     async function getAllOrders() {

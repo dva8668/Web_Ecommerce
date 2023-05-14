@@ -98,7 +98,7 @@ const DefaultLayoutAdmin = ({ children }) => {
           }}
         />
         <Menu
-          theme="dark"
+          theme="light"
           mode="inline"
           defaultSelectedKeys={[key]}
           items={items}
@@ -128,13 +128,7 @@ const DefaultLayoutAdmin = ({ children }) => {
             {children}
           </div>
         </Content>
-        <Footer
-          style={{
-            textAlign: "center",
-          }}
-        >
-          Copyright by Viet Anh.
-        </Footer>
+       
       </Layout>
     </Layout>
   );

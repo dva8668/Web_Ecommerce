@@ -15,11 +15,7 @@ function HomeCartView({ cart, show, showHideModal, totalPrice, handleDelete }) {
     <Modal show={show} onHide={() => showHideModal()} className="right">
       <Modal.Header closeButton>
         <Modal.Title>Giỏ hàng</Modal.Title>
-        {cart.length > 0 ? (
-          <span className="checkout--btn" onClick={goToChechout}>
-            checkout{" "}
-          </span>
-        ) : null}
+       
       </Modal.Header>
       <Modal.Body className="modal-body-content">
         <div>

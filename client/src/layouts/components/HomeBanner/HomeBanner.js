@@ -15,6 +15,7 @@ function HomeBanner() {
           className="d-block w-100 main_slider"
           style={{
             backgroundImage: `url(${BackgroundImage1})`,
+            backgroundPosition: "center top"
           }}
         >
           <div className="container fill_height">
@@ -37,6 +38,8 @@ function HomeBanner() {
           className="d-block w-100 main_slider"
           style={{
             backgroundImage: `url(${BackgroundImage2})`,
+            backgroundPosition: "center top"
+
           }}
         >
           <div className="container fill_height">
@@ -59,6 +62,8 @@ function HomeBanner() {
           className="d-block w-100 main_slider"
           style={{
             backgroundImage: `url(${BackgroundImage3})`,
+            backgroundPosition: "center top"
+
           }}
         >
           <div className="container fill_height">

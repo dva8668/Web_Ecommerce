@@ -10,12 +10,6 @@ function Filter() {
       </div>
       <ul className="sidebar_categories">
         <li>
-          <Link to="/category/t-shirt">Mới nhất</Link>
-        </li>
-        <li>
-          <Link to="/category/hoodie">Bán chạy</Link>
-        </li>
-        <li>
           <Link to="/category/t-shirt">Áo thun</Link>
         </li>
         <li>

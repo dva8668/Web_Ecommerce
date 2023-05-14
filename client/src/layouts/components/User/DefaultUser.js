@@ -66,7 +66,7 @@ const DefaultUser = ({ children }) => {
           }}
         >
           <Menu
-            theme="dark"
+            theme="light"
             mode="inline"
             defaultSelectedKeys={[key]}
             items={items}

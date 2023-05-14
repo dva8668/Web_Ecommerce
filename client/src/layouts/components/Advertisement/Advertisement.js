@@ -76,7 +76,7 @@ const Advertisement = (localDate) => {
           <div className="col-lg-6 text-right deal_ofthe_week_col">
             <div className="deal_ofthe_week_content d-flex flex-column align-items-center float-right">
               <div className="section_title">
-                <h2>Khuyễn mại cực SỐC !!!</h2>
+                <h2>Khuyến mại cực SỐC !!!</h2>
               </div>
               <ul className="timer">
                 <li className="d-inline-flex flex-column justify-content-center align-items-center">
@@ -107,7 +107,7 @@ const Advertisement = (localDate) => {
                 </li>
               </ul>
               <div className="red_button deal_ofthe_week_button">
-                <Link to="">Mua ngay</Link>
+                <Link to="/category/t-shirt">Mua ngay</Link>
               </div>
             </div>
           </div>

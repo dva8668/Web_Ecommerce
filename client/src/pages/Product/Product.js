@@ -114,18 +114,26 @@ function ProductPage() {
 
   const addToBag = async (values) => {
     setLoading(true);
-    try {
-      const newValue = { ...values, productId: path, price: product.price };
-      const post = await apiPrivate("/cart/createCart", "POST", newValue);
-      if (post.success) {
-        alert("Added to cart");
-        navigate(0);
-      } else alert("Failed to cart");
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+
+    const token = localStorage.getItem("token")
+    if (token) {
+
+      try {
+        const newValue = { ...values, productId: path, price: product.price };
+        const post = await apiPrivate("/cart/createCart", "POST", newValue);
+        if (post.success) {
+          alert("Added to cart");
+          navigate(0);
+        } else alert("Failed to cart");
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      navigate("/login")
     }
+    
   };
 
   return (

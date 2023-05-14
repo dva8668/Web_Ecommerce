@@ -119,7 +119,7 @@ const UserSetting = () => {
                     },
                   ]}
                 >
-                  <Input style={{ width: "348px" }} disabled={true} />
+                  <Input style={{ width: "348px" }}  />
                 </Form.Item>
                 <Form.Item
                   name="phone"

@@ -23,7 +23,6 @@ function SingleProduct({ productItem, addToBag }) {
           <h4 className="product_name">{productItem.title}</h4>
           <div className="product_price">
             {productItem.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}{" "}
-            đ
             <span>
               {(productItem.price * 2 - 1)
                 .toString()
@@ -32,12 +31,6 @@ function SingleProduct({ productItem, addToBag }) {
             </span>
           </div>
         </div>
-      </div>
-      <div
-        className="red_button add_to_cart_button"
-        onClick={() => addToBag(productItem.productId)}
-      >
-        <div style={{ color: "#ffffff" }}>Thêm vào giỏ hàng</div>
       </div>
     </div>
   );

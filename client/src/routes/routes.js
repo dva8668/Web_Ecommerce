@@ -1,11 +1,12 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import ProtectedRoute from "./protectedRoute";
 import DefaultLayoutAdmin from "../pages/Admin/Layout/DefaultLayoutAdmin";
 import { publicRoutes, privateRoutes } from "./config";
 import DefaultLayout from "../layouts/DefaultLayout/DefaultLayout";
 
 const Routess = () => {
+
   return (
     <Routes>
       {publicRoutes.map((route, index) => {

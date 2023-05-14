@@ -93,7 +93,7 @@ const DefaultLayout = ({ children }) => {
                 <div className="col-lg-12 text-right">
                   <div className="logo_container">
                     <Link to="/">
-                      <span>Supper</span>Market
+                      <span>Ha</span>Lao
                     </Link>
                   </div>
                   <nav className="navbar">
@@ -102,12 +102,10 @@ const DefaultLayout = ({ children }) => {
                         <Link to="/">Trang chủ</Link>
                       </li>
                       <li>
-                        <Link to="/category/t-shirt">Mới nhất</Link>
+                        <Link to="/category/t-shirt">Sản phẩm</Link>
                       </li>
 
-                      <li>
-                        <Link to="/category/sweater">Bán chạy</Link>
-                      </li>
+                      
                     </ul>
                     {token || authState.isAuthenticated ? (
                       <ul className="navbar_user">
@@ -209,11 +207,7 @@ const DefaultLayout = ({ children }) => {
               <div className="col-lg-12">
                 <div className="footer_nav_container">
                   <div className="cr">
-                    ©2022 All Rights Reserverd. This template is made with{" "}
-                    <i className="fa fa-heart-o" aria-hidden="true"></i> by{" "}
-                    <Link to="https://fb.com/dva8668" target="_blank">
-                      VA
-                    </Link>
+                    ©2022 All Rights Reserved
                   </div>
                 </div>
               </div>

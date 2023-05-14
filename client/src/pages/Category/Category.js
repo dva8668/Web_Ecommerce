@@ -60,40 +60,7 @@ function Category() {
           </div>
           <div className="main_content">
             <div className="products_iso">
-              <div className="row">
-                <div className="col">
-                  <div className="product_sorting_container product_sorting_container_top">
-                    <ul className="product_sorting">
-                      <li>
-                        <span className="type_sorting_text">
-                          Default Sorting
-                        </span>
-                        <i className="fa fa-angle-down"></i>
-                        <ul className="sorting_type">
-                          <li
-                            className="type_sorting_btn"
-                            data-isotope-option='{ "sortBy": "original-order" }'
-                          >
-                            <span>Default Sorting</span>
-                          </li>
-                          <li
-                            className="type_sorting_btn"
-                            data-isotope-option='{ "sortBy": "price" }'
-                          >
-                            <span>Price</span>
-                          </li>
-                          <li
-                            className="type_sorting_btn"
-                            data-isotope-option='{ "sortBy": "name" }'
-                          >
-                            <span>Product Name</span>
-                          </li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+             
 
               <div className="row">
                 {products &&

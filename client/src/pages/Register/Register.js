@@ -42,7 +42,7 @@ function Register() {
           </div>
 
           <form className={cx("login100-form validate-form")}>
-            <span className={cx("login100-form-title")}>Member Register</span>
+            <span className={cx("login100-form-title")}>Đăng ký</span>
 
             <div className={cx("wrap-input100 validate-input")}>
               <input

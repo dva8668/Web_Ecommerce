@@ -22,7 +22,8 @@ function Home() {
   useEffect(() => {
     async function getCategoryByPath() {
       try {
-        const data = await apiRequest(`/product/getProductByCategory/t-shirt`);
+        // const data = await apiRequest(`/product/getProductByCategory/t-shirt`);
+        const data = await apiRequest(`/product/getBestSeller`);
         if (data.success) {
           setProducts(
             data.products.map((product) => {

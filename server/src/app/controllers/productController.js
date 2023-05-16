@@ -26,6 +26,40 @@ class ProductController {
     });
   }
 
+  getBestSeller(req, res) {
+    const params = req.params;
+    pool.getConnection(function (err, connection) {
+      if (err) throw err;
+      connection.query(
+        "SELECT * FROM  product",
+        [params.params],
+        (err, rows, fields) => {
+          if (err) throw err;
+          if (rows.length === 0)
+            return res.json({ success: false, products: [] });
+          res.status(200).json({
+            success: true,
+            products: rows.map((row) => {
+              return {
+                ...row,
+                image: {
+                  name: row.image,
+                  thumbUrl: fs.readFileSync(
+                    `./client/src/assets/images/${row.image}`,
+                    {
+                      encoding: "base64",
+                    }
+                  ),
+                },
+              };
+            }),
+          });
+        }
+      );
+      connection.release();
+    });
+  }
+
   getProductByCategory(req, res) {
     const params = req.params;
     pool.getConnection(function (err, connection) {

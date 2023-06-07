@@ -15,6 +15,7 @@ router.put("/editOrder/:orderId", verifyToken, OrderController.editOrder);
 router.delete("/delete/:id", verifyToken, OrderController.deleteOrderById);
 
 router.get("/getOrderQuality", verifyToken, OrderController.getOrderQuality);
+router.get("/getQualityByDate", verifyToken, OrderController.getQualityByDate);
 
 // checkout
 router.post("/create_payment_url", OrderController.createPaymentUrl);

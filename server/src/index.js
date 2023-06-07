@@ -28,6 +28,26 @@ route(app);
 
 var server = http.createServer(app);
 
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
+
+io.on("connection", (socket) => {
+  ///Handle khi có connect từ client tới
+  console.log("New client connected!");
+
+  socket.on("sendDataClient", function ({ newDate, cartSelect }) {
+    // Handle khi có sự kiện tên là sendDataClient từ phía client
+    io.emit("sendDataServer", { newDate, cartSelect }); // phát sự kiện  có tên sendDataServer cùng với dữ liệu tin nhắn từ phía server
+  });
+
+  socket.on("disconnect", () => {
+    console.log("Client disconnected"); // Khi client disconnect thì log ra terminal.
+  });
+});
+
 server.listen(PORT, () => {
   console.log(`Server listening on ${PORT}`);
 });

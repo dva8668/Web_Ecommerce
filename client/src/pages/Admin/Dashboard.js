@@ -205,6 +205,8 @@ const Dashboard = () => {
               this[a.date].quality += a.quality;
             }, Object.create(null));
 
+            console.log(result);
+
             setCountQuality(result);
 
             // set Revennue

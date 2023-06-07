@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   const isAdmin = localStorage.getItem("isAdmin");
 
   if (token) {
-    if (isAdmin == 1) {
+    if (isAdmin === "1") {
       return children ? children : <Outlet />;
     } else {
       return <Navigate to="/" replace />;

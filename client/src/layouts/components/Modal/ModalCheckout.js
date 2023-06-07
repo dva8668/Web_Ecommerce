@@ -13,9 +13,8 @@ import {
 } from "antd";
 import apiPrivate from "../../../hooks/apiPrivate";
 import { AuthContext } from "../../../contexts/authContext";
-import { useNavigate } from "react-router-dom";
 import apiRequest from "../../../hooks/api";
-
+import { socket } from "../../../utils/socket";
 const { Meta } = Card;
 
 const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
@@ -25,7 +24,6 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
   const [fetchedLoading, setFetchedLoading] = useState(false);
   const [paymentLoading, setPaymentLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   useEffect(() => {
     async function getProfile() {
@@ -87,6 +85,16 @@ const ModalCheckout = ({ open, setOpen, cartSelect, totalPrice }) => {
       });
 
       if (createOrder.success) {
+        const date = new Date();
+        const month =
+          (date.getMonth() + 1).length != 2
+            ? "0" + (date.getMonth() + 1)
+            : date.getMonth() + 1;
+        const dates =
+          date.getDate().length != 2 ? "0" + date.getDate() : date.getDate();
+        const newDate = `${date.getFullYear()}-${month}-${dates}`;
+
+        socket.timeout(2000).emit("sendDataClient", { newDate, cartSelect });
         window.location.replace("/success");
       }
     } catch (error) {

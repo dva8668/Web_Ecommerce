@@ -4,7 +4,6 @@ import Collection from "../pages/Admin/Products/Collection";
 import Dashboard from "../pages/Admin/Dashboard";
 import Warehouse from "../pages/Admin/Products/Warehouse";
 import User from "../pages/Admin/Users/User";
-import Create from "../pages/Admin/Orders/Create";
 import Order from "../pages/Admin/Orders/Order";
 import Discount from "../pages/Admin/Discounts/Discount";
 import PageNotFound from "../pages/PageNotFound";
@@ -18,6 +17,7 @@ import UserSetting from "../layouts/components/User/UserSetting";
 import UserOrder from "../layouts/components/User/UserOrder";
 import Cart from "../pages/Cart/Cart";
 import Success from "../layouts/components/Success/success";
+import RealTime from "../pages/Admin/Orders/RealTime";
 
 const publicRoutes = [
   { path: "/", component: Home },
@@ -35,7 +35,7 @@ const publicRoutes = [
 const privateRoutes = [
   { path: "dashboard", component: Dashboard },
   { path: "dashboard/orders", component: Order },
-  { path: "dashboard/create-order", component: Create },
+  { path: "dashboard/real-time", component: RealTime },
   { path: "dashboard/products", component: Product },
   { path: "dashboard/collections", component: Collection },
   { path: "dashboard/create-new-product", component: CreateNewProduct },

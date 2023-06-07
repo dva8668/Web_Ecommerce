@@ -3,7 +3,6 @@ import {
   ShopOutlined,
   UserOutlined,
   ShoppingOutlined,
-  PercentageOutlined,
   TagOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, theme } from "antd";
@@ -31,8 +30,8 @@ const items = [
   getItem("Orders", "Orders", <ShoppingOutlined />, [
     getItem(<NavLink to="/dashboard/orders">Orders</NavLink>, "orders"),
     getItem(
-      <NavLink to="/dashboard/create-order">Create craft order</NavLink>,
-      "create-order"
+      <NavLink to="/dashboard/real-time">Real Time</NavLink>,
+      "real-time"
     ),
   ]),
   getItem("Products", "Products", <TagOutlined />, [

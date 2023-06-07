@@ -41,7 +41,7 @@ function Cart() {
                 };
               }
             });
-            if (newItem) return newItem;
+            return newItem;
           });
           // const totalQty = newData.reduce((a, b) => a + b.quality, 0);
           // const totalPrice = newData.reduce((a, b) => a + b.price, 0);

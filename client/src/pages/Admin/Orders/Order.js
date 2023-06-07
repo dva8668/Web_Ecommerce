@@ -16,6 +16,15 @@ import ModalOrderAdmin from "../Components/ModalOrderAdmin";
 import apiPrivate from "../../../hooks/apiPrivate";
 
 const { RangePicker } = DatePicker;
+const prettyLink = {
+  backgroundColor: "#8dc63f",
+  fontSize: 14,
+  fontWeight: 500,
+  height: 52,
+  padding: "0 48px",
+  borderRadius: 5,
+  color: "#fff",
+};
 const Order = () => {
   const searchInput = useRef(null);
   const [searchText, setSearchText] = useState("");
@@ -358,6 +367,7 @@ const Order = () => {
       )
     );
   };
+  console.log(dataExport);
 
   return (
     <>
@@ -402,8 +412,7 @@ const Order = () => {
         <Form.Item style={{ marginLeft: 20 }}>
           <CSVLink
             data={dataExport}
-            // asyncOnClick={true}
-            // onClick={handleExport}
+            filename={`order_${Date.now()}`}
             style={{ color: "red" }}
           >
             {" "}

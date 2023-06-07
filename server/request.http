@@ -15,7 +15,7 @@ Content-Type: application/json
 
 
 ### GET User
-GET http://localhost:3001/order/getOrderQuality
+GET http://localhost:3001/order/getQualityByDate
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJuYW1lIjoiYWRtaW4iLCJpYXQiOjE2ODMxMjc2MzZ9.kFE4pzQKFl1qYJcoKk6OhyFvzFNRZ-PzfHowIO2IEiU
 
 

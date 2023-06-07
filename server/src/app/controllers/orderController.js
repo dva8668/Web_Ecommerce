@@ -83,6 +83,22 @@ class OrderController {
     });
   }
 
+  getQualityByDate(req, res) {
+    pool.getConnection(function (err, connection) {
+      if (err) throw err;
+      connection.query(
+        "SELECT COUNT(*), substring(orderDate,1,10) FROM ecommerce.orders GROUP BY substring(orderDate,1,10)",
+        (err, rows, fields) => {
+          if (err) throw err;
+          if (rows.length === 0)
+            return res.status(401).json({ success: false });
+          res.status(200).json({ success: true, orders: rows });
+        }
+      );
+      connection.release();
+    });
+  }
+
   createOrder(req, res) {
     const user = req.body.user;
     const carts = req.body.cart;

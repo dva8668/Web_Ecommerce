@@ -170,7 +170,7 @@ const Order = () => {
       width: "60px",
     },
     {
-      title: "Email",
+      title: "Username",
       dataIndex: "username",
       key: "username",
       ellipsis: true,

@@ -139,7 +139,7 @@ const CreateNewProduct = () => {
             </Form.Item>
             <Form.Item
               name="path"
-              label="Supplier"
+              label="Path"
               hasFeedback
               validateStatus={validate}
               rules={[

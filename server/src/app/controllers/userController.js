@@ -180,7 +180,7 @@ class UserController {
         (err, rows, fields) => {
           if (err) throw err;
           if (rows.length > 0) {
-            res.json({ success: false });
+            res.json({ success: false, status: "Tai khoan da ton tai!" });
           } else {
             connection.query(
               `INSERT INTO user (username, password, fullname, phone, isAdmin) VALUES (${JSON.stringify(

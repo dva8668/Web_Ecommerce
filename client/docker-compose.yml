@@ -1,0 +1,9 @@
+services:
+  client:
+    build: .
+    image: client
+    volumes:
+      - ./src:/client/src
+      - ./public:/client/public
+    ports:
+      - 3000:3000
